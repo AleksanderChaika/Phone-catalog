@@ -1,44 +1,165 @@
 # Phone Catalog
 
-A dynamic, fully responsive e-commerce web application that allows users to browse, filter, and purchase mobile devices.
+A modern **Single Page Application (SPA)** built with **React** and **TypeScript** that simulates an online mobile phone store. Users can browse products, search, filter, sort, add items to favorites or the shopping cart, and explore detailed product pages.
+
+---
 
 ## Live Preview
 
-🔗 [Launch Live Demo](https://aleksanderchaika.github.io/Phone-catalog/)
+ **Demo:**
+https://aleksanderchaika.github.io/Phone-catalog/
+
+---
 
 ## Design Reference
 
-🎨 [Figma Design Layouts & Prototype](https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark?node-id=0-1&p=f)
+**Figma Design:**
+https://www.figma.com/design/3dVbRBfoY6f9cQZQ0fJz9A/Phone-catalog--V2--Rounded-Style
 
-The project was built according to the original Dark V2 Figma layout specifications to ensure pixel-perfect UI rendering, responsive breakpoints, and exact component placement.
+The application was developed based on the original Figma design with attention to responsive layouts, reusable UI components, and pixel-perfect implementation.
+
+---
 
 ## Technologies Used
 
-*   **React** (with Hooks and Component Architecture)
-*   **TypeScript** (for strict type safety)
-*   **React Router** (for dynamic navigation and routing)
-*   **SCSS / Sass** (using BEM methodology for scalable styling)
-*   **Vite** (as the fast build tool and bundler)
-*   **ESLint & Prettier** (for code quality and consistent formatting)
+* **React** — Component-based UI architecture
+* **TypeScript** — Static typing and improved code reliability
+* **React Router** — Client-side routing and dynamic navigation
+* **Context API** — Global state management
+* **SCSS (Sass)** — Modular styling with BEM methodology
+* **Vite** — Fast development server and build tool
+* **ESLint & Prettier** — Code quality and formatting
+
+---
 
 ## Getting Started
 
-Follow these steps to run the project locally on your machine.
-
 ### Prerequisites
 
-Make sure you have **Node.js** installed.
+Before running the project, make sure you have installed:
+
+* Node.js (v18 or higher recommended)
+* npm
 
 ### Installation
 
-1. Clone the repository:
+Clone the repository:
+
 ```bash
-   git clone [https://github.com/aleksanderchaika/Phone-catalog.git](https://github.com/aleksanderchaika/Phone-catalog.git)
+git clone https://github.com/AleksanderChaika/Phone-catalog.git
+```
 
-Features
+Navigate to the project directory:
 
-Responsive Layout: Fully optimized for mobile, tablet, and desktop viewports.
-Dynamic Product Catalog: Advanced filtering, sorting, and pagination for smooth product discovery.
-Interactive Search: Real-time search query matching via URL search parameters.
-Shopping Cart & Favorites: Seamlessly add/remove products and manage item quantities.
-Detailed Product Pages: In-depth tech specs, image galleries, and related product recommendations.
+```bash
+cd Phone-catalog
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+Open your browser:
+
+```text
+http://localhost:3000
+```
+
+---
+
+# Features
+
+### Product Catalog
+
+* Browse phones, tablets, and accessories
+* Responsive product grid
+* Product cards with pricing and specifications
+
+### Search & Filtering
+
+* Search products by name
+* Filter products by category
+* Sort products by age, name, or price
+* Change the number of displayed items per page
+
+### Product Details
+
+* Detailed product information
+* Image gallery
+* Available colors and capacities
+* Technical specifications
+* Suggested related products
+
+### Shopping Cart
+
+* Add and remove products
+* Increase or decrease product quantity
+* Automatic total price calculation
+* Cart data persists after page refresh
+
+### Favorites
+
+* Add products to favorites
+* Remove products from favorites
+* Favorites persist between sessions
+
+### Navigation
+
+* Client-side routing with React Router
+* Breadcrumb navigation
+* URL-based search, filtering, sorting, and pagination
+
+### Responsive Design
+
+The application is fully optimized for:
+
+*  Mobile devices
+*  Tablets
+*  Laptops
+*  Desktop screens
+
+---
+
+## Project Structure
+
+```text
+src/
+├── api/
+├── assets/
+├── components/
+├── context/
+├── helpers/
+├── hooks/
+├── pages/
+├── types/
+└── utils/
+```
+
+---
+
+## Known Limitations
+
+Current version limitations:
+
+* No user authentication
+* No backend or database integration
+* No online payment system
+* Product data is loaded from static JSON files
+* No product reviews or rating system
+
+---
+
+## Author
+
+**Aleksander Chaika**
+
+GitHub: https://github.com/AleksanderChaika
+
