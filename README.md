@@ -14,7 +14,7 @@ https://aleksanderchaika.github.io/Phone-catalog/
 ## Design Reference
 
 **Figma Design:**
-https://www.figma.com/design/3dVbRBfoY6f9cQZQ0fJz9A/Phone-catalog--V2--Rounded-Style
+[https://www.figma.com/design/3dVbRBfoY6f9cQZQ0fJz9A/Phone-catalog--V2--Rounded-Style](https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark?node-id=0-1&p=f&t=rPKTYGZ5LKYPpymd-0)
 
 The application was developed based on the original Figma design with attention to responsive layouts, reusable UI components, and pixel-perfect implementation.
 
