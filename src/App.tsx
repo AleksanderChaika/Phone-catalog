@@ -12,6 +12,8 @@ import { PhonesPage } from './components/pages/PhonesPage/PhonesPage';
 import { ProductDetailsPage } from './components/pages/ProductDetailsPage/ProductDetailsPage';
 import { CartPage } from './components/pages/CartPage/CartPage';
 import { FavoritesPage } from './components/pages/FavoritesPage/FavoritesPage';
+import { NotFoundPage } from './components/pages/NotFoundPage/NotFoundPage';
+import { Loader } from './components/Loader';
 import { ScrollToTop } from './utils/ScrollToTop';
 
 import './App.scss';
@@ -55,7 +57,7 @@ export const App: React.FC = () => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader text="Loading products..." />;
   }
 
   if (hasError) {
@@ -105,7 +107,7 @@ export const App: React.FC = () => {
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/cart" element={<CartPage />} />
 
-          <Route path="*" element={<h1>Page not found</h1>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
 
