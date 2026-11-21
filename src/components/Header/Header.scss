@@ -1,8 +1,10 @@
-$white: #f1f2f9;
-$secondary: #89939a;
+@use '../../styles/variables' as *;
+
+$white: $color-text;
+$secondary: $color-text-muted;
 $accent: #313237;
-$bg-dark: #0f1117;
-$border-color: #323542;
+$bg-dark: $color-bg;
+$border-color: $color-surface-alt;
 
 .header {
   position: fixed;
@@ -125,7 +127,7 @@ $border-color: #323542;
     border: 2px solid $bg-dark;
     border-radius: 50%;
     background-color: #eb5757;
-    color: #fff;
+    color: $color-white;
     font-size: 9px;
     font-weight: 700;
   }
@@ -274,7 +276,7 @@ $border-color: #323542;
 
 .main-title {
   margin: 24px 0;
-  color: #fff;
+  color: $color-white;
   font-family: Mont, sans-serif;
   font-size: 32px;
   font-weight: 800;

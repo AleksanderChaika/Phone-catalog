@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .pagination {
   display: flex;
   margin-top: 40px;
@@ -13,9 +15,9 @@
     height: 32px;
     align-items: center;
     justify-content: center;
-    border: 1px solid #323542;
+    border: 1px solid $color-surface-alt;
     background-color: transparent;
-    color: #f1f2f9;
+    color: $color-text;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -25,7 +27,7 @@
     &.is-active {
       background-color: #8e7cea;
       border-color: #8e7cea;
-      color: #fff;
+      color: $color-white;
     }
 
     &:disabled {
@@ -34,15 +36,15 @@
     }
 
     &:hover:not(:disabled, .is-active) {
-      border-color: #f1f2f9;
+      border-color: $color-text;
     }
 
     &--prev {
-      background: url('../../../public/img/icons/arrow-left.svg') no-repeat center #323542;
+      background: url('../../../public/img/icons/arrow-left.svg') no-repeat center $color-surface-alt;
     }
 
     &--next {
-      background: url('../../../public/img/icons/arrow-left.svg') no-repeat center #323542;
+      background: url('../../../public/img/icons/arrow-left.svg') no-repeat center $color-surface-alt;
       transform: rotate(180deg);
     }
   }

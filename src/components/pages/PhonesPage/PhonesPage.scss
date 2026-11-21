@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as *;
+
 .phones-page {
   padding-bottom: 40px;
   padding-top: 48px;
@@ -14,7 +16,7 @@
     font-size: 32px;
     line-height: 41px;
     letter-spacing: -0.01em;
-    color: #f1f2f9;
+    color: $color-text;
 
     margin: 24px 0 8px;
 
@@ -27,7 +29,7 @@
 
   &__count {
     font-size: 14px;
-    color: #89939a;
+    color: $color-text-muted;
     margin-bottom: 40px;
   }
 

@@ -1,3 +1,4 @@
+@use 'styles/variables' as *;
 @import 'https://fonts.cdnfonts.com/css/mont';
 
 * {
@@ -43,8 +44,8 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-color: #0f1117;
-  color: #f1f2f9;
+  background-color: $color-bg;
+  color: $color-text;
   font-family: Mont, sans-serif;
 }
 
@@ -76,8 +77,8 @@ body.is-menu-open {
   height: 40px;
   padding: 0 24px;
   border: none;
-  background-color: #8970ff;
-  color: #fff;
+  background-color: $color-accent;
+  color: $color-white;
   font-family: Mont, sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -85,7 +86,7 @@ body.is-menu-open {
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #a38fff;
+    background-color: $color-accent-hover;
   }
 }
 
@@ -97,6 +98,6 @@ body.is-menu-open {
   justify-content: center;
   gap: 24px;
   padding: 64px 16px;
-  color: #f1f2f9;
+  color: $color-text;
   text-align: center;
 }

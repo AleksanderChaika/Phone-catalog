@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as *;
+
 .not-found {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,7 @@
     font-size: 120px;
     font-weight: 800;
     line-height: 1;
-    color: #8970ff;
+    color: $color-accent;
     margin: 0;
 
     @media (min-width: 640px) {
@@ -21,13 +23,13 @@
 
   &__subtitle {
     font-size: 32px;
-    color: #f1f2f9;
+    color: $color-text;
     margin-bottom: 16px;
   }
 
   &__text {
     font-size: 16px;
-    color: #75767f;
+    color: $color-text-secondary;
     max-width: 400px;
     margin-bottom: 32px;
     line-height: 1.5;
@@ -39,15 +41,15 @@
     justify-content: center;
     height: 48px;
     padding: 0 32px;
-    background-color: #8970ff;
-    color: #fff;
+    background-color: $color-accent;
+    color: $color-white;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #a38fff;
+      background-color: $color-accent-hover;
     }
   }
 }

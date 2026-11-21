@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .banner-section {
   padding-top: 32px;
   max-width: 1136px;
@@ -17,7 +19,7 @@
     font-size: 32px;
     line-height: 41px;
     letter-spacing: -0.01em;
-    color: #fff;
+    color: $color-white;
     margin-top: 0;
     margin-bottom: 24px;
     text-align: left;
@@ -86,7 +88,7 @@
       margin: 0;
       height: 100%;
       width: 32px;
-      background-color: #323542;
+      background-color: $color-surface-alt;
       cursor: pointer;
       align-items: center;
       justify-content: center;
@@ -94,7 +96,7 @@
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: #4a4d58;
+        background-color: $color-border-strong;
       }
     }
 
@@ -104,8 +106,8 @@
         content: '';
         width: 8px;
         height: 8px;
-        border-left: 2px solid #fff;
-        border-bottom: 2px solid #fff;
+        border-left: 2px solid $color-white;
+        border-bottom: 2px solid $color-white;
         transform: rotate(45deg);
         margin-left: 4px;
       }
@@ -117,8 +119,8 @@
         content: '';
         width: 8px;
         height: 8px;
-        border-right: 2px solid #fff;
-        border-top: 2px solid #fff;
+        border-right: 2px solid $color-white;
+        border-top: 2px solid $color-white;
         transform: rotate(45deg);
         margin-right: 4px;
       }
@@ -137,12 +139,12 @@
     padding: 0;
     width: 14px;
     height: 4px;
-    background-color: #323542;
+    background-color: $color-surface-alt;
     cursor: pointer;
     transition: background-color 0.3s;
 
     &.is-active {
-      background-color: #f1f2f9;
+      background-color: $color-text;
     }
   }
 }
