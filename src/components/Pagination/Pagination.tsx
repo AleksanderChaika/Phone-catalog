@@ -54,6 +54,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
           className="pagination__btn pagination__btn--prev"
+          aria-label="Previous page"
         />
       </li>
 
@@ -64,6 +65,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
             className={`pagination__btn ${
               page === currentPage ? 'is-active' : ''
             }`}
+            aria-current={page === currentPage ? 'page' : undefined}
             onClick={() => handlePageChange(page)}
           >
             {page}
@@ -77,6 +79,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
           disabled={currentPage === totalPages}
           onClick={() => handlePageChange(currentPage + 1)}
           className="pagination__btn pagination__btn--next"
+          aria-label="Next page"
         />
       </li>
     </ul>
