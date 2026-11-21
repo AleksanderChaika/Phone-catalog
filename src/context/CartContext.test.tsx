@@ -132,8 +132,6 @@ describe('CartContext', () => {
       act(() => result.current.addToCart(phoneA));
       act(() => result.current.handleCheckout());
 
-      // Regression: the cart used to be cleared right here, so the modal,
-      // which is shown only for a non-empty cart, could never appear
       expect(result.current.isCheckout).toBe(true);
       expect(result.current.cart).toHaveLength(1);
     });

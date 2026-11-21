@@ -26,7 +26,6 @@ export const createProduct = (
   ...overrides,
 });
 
-// Shows where the router is, so tests can check the URL and how we got there
 export const LocationProbe: React.FC = () => {
   const location = useLocation();
   const navigationType = useNavigationType();

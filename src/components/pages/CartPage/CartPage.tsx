@@ -24,8 +24,6 @@ export const CartPage: React.FC = () => {
 
   const handleClose = useCallback(() => {
     closeCheckout();
-    // The Checkout button disappears together with the cleared cart,
-    // so focus goes to the page title instead of getting lost
     titleRef.current?.focus();
   }, [closeCheckout]);
 
@@ -41,7 +39,6 @@ export const CartPage: React.FC = () => {
         handleClose();
       }
 
-      // Close is the only focusable element, so keep focus inside the modal
       if (event.key === 'Tab') {
         event.preventDefault();
         closeButtonRef.current?.focus();

@@ -23,9 +23,6 @@ jobs:
           node-version: 24
           cache: npm
 
-      # --ignore-scripts skips "postinstall" (cypress verify and
-      # mate-scripts update): the Cypress binary is not needed here and
-      # the update script rewrites project files
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
@@ -44,8 +41,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      # The site is served from /Phone-catalog/, so absolute /assets paths
-      # would 404 there ("homepage" in package.json sets the Vite base)
       - name: Check that the build uses relative asset paths
         run: |
           if grep -nE '(src|href)="/assets' dist/index.html; then

@@ -14,7 +14,6 @@ module.exports = {
   ],
   overrides: [
     {
-      // Test tooling is a devDependency by design
       'files': ['src/setupTests.ts', '**/*.test.ts', '**/*.test.tsx'],
       'rules': {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],

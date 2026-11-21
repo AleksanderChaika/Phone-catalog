@@ -36,7 +36,6 @@ export const PhonesPage: React.FC<Props> = ({ products, title }) => {
   const isAll = perPage === 'all';
   const itemsCount = isAll ? total : Number(perPage);
 
-  // Keep the page inside 1..totalPages, so ?page=99 never shows an empty list
   const totalPages = itemsCount > 0 ? Math.ceil(total / itemsCount) : 1;
   const currentPage = getValidPage(pageParam, totalPages);
 
