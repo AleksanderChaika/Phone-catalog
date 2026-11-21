@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { App } from './App';
 import { CartProvider } from './context/CartContext';
@@ -54,16 +54,20 @@ describe('phones page and the ?page param', () => {
   it('redirects ?page=99 to the last page with replace', async () => {
     renderApp('/phones?page=99');
 
-    // Only 4 phones are left on the last page
+    // The cards render before the redirect effect updates the URL,
+    // so the URL has to be awaited as well
     await vi.waitFor(() => {
+      // Only 4 phones are left on the last page
       expect(screen.getAllByRole('article')).toHaveLength(4);
+      expect(screen.getByTestId('location')).toHaveTextContent(
+        '/phones?page=2',
+      );
     });
 
     expect(screen.getByRole('button', { name: '2' })).toHaveAttribute(
       'aria-current',
       'page',
     );
-    expect(screen.getByTestId('location')).toHaveTextContent('/phones?page=2');
     expect(screen.getByTestId('navigation-type')).toHaveTextContent('REPLACE');
   });
 
@@ -74,11 +78,11 @@ describe('phones page and the ?page param', () => {
 
       await vi.waitFor(() => {
         expect(screen.getAllByRole('article')).toHaveLength(16);
+        expect(screen.getByTestId('location')).toHaveTextContent(
+          '/phones?page=1',
+        );
       });
 
-      expect(screen.getByTestId('location')).toHaveTextContent(
-        '/phones?page=1',
-      );
       expect(screen.getByTestId('navigation-type')).toHaveTextContent(
         'REPLACE',
       );
@@ -91,6 +95,9 @@ describe('phones page and the ?page param', () => {
     await vi.waitFor(() => {
       expect(screen.getAllByRole('article')).toHaveLength(4);
     });
+
+    // Let any pending effects run, so a wrong redirect would show up here
+    await act(async () => undefined);
 
     expect(screen.getByTestId('location')).toHaveTextContent('/phones?page=2');
     expect(screen.getByTestId('navigation-type')).toHaveTextContent('POP');
