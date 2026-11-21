@@ -2,8 +2,7 @@
 import { Product } from '../types/Product';
 import { ProductDetails } from '../types/ProductDetails';
 
-const BASE_URL =
-  window.location.hostname === 'localhost' ? '' : '/react_phone-catalog';
+const BASE_URL = import.meta.env.BASE_URL;
 
 const fetchData = async <T>(path: string): Promise<T> => {
   const url = `${BASE_URL}${path}`.replace(/\/+/g, '/');
