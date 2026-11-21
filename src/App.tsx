@@ -57,7 +57,7 @@ export const App: React.FC = () => {
     return (
       <div className="app__error" role="alert">
         <p>Failed to load products. Check your connection and try again.</p>
-        <button type="button" onClick={loadData}>
+        <button type="button" className="btn-primary" onClick={loadData}>
           Retry
         </button>
       </div>
