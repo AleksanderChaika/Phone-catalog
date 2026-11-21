@@ -105,13 +105,18 @@ export const CartPage: React.FC = () => {
       </div>
 
       {isModalOpen && (
-        <div
-          className="checkout-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="checkout-modal-title"
-        >
-          <div className="checkout-modal__box">
+        <div className="checkout-modal">
+          <div
+            className="checkout-modal__backdrop"
+            aria-hidden="true"
+            onClick={handleClose}
+          />
+          <div
+            className="checkout-modal__box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="checkout-modal-title"
+          >
             <h2 id="checkout-modal-title" className="checkout-modal__title">
               Order placed
             </h2>
