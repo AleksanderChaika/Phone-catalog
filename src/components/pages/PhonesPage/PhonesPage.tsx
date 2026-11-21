@@ -8,6 +8,7 @@ import { SortSelector } from '../../SortSelector/SortSelector';
 import { ItemsPerPage } from '../../ItemsPerPage/ItemsPerPage';
 import { Pagination } from '../../Pagination/Pagination';
 import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
+import { getValidPage } from '../../../utils/pagination';
 
 interface Props {
   products: Product[];
@@ -37,8 +38,7 @@ export const PhonesPage: React.FC<Props> = ({ products, title }) => {
 
   // Keep the page inside 1..totalPages, so ?page=99 never shows an empty list
   const totalPages = itemsCount > 0 ? Math.ceil(total / itemsCount) : 1;
-  const requestedPage = Math.trunc(Number(pageParam)) || 1;
-  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+  const currentPage = getValidPage(pageParam, totalPages);
 
   useEffect(() => {
     if (pageParam === null || isAll || total === 0) {
