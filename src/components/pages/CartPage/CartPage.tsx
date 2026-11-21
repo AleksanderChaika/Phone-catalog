@@ -9,8 +9,14 @@ const BASE = import.meta.env.BASE_URL.endsWith('/')
   : `${import.meta.env.BASE_URL}/`;
 
 export const CartPage: React.FC = () => {
-  const { cart, totalAmount, totalItems, handleCheckout, isCheckout } =
-    useCart();
+  const {
+    cart,
+    totalAmount,
+    totalItems,
+    handleCheckout,
+    closeCheckout,
+    isCheckout,
+  } = useCart();
 
   return (
     <div className="cart-page">
@@ -62,8 +68,25 @@ export const CartPage: React.FC = () => {
       </div>
 
       {isCheckout && cart.length > 0 && (
-        <div className="checkout-modal">
-          <p>Checkout is not implemented yet</p>
+        <div
+          className="checkout-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="checkout-modal-title"
+        >
+          <div className="checkout-modal__box">
+            <h2 id="checkout-modal-title" className="checkout-modal__title">
+              Checkout
+            </h2>
+            <p>Checkout is not implemented yet</p>
+            <button
+              type="button"
+              className="summary__checkout-btn"
+              onClick={closeCheckout}
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
     </div>
