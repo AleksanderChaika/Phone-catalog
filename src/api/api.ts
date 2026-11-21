@@ -21,15 +21,11 @@ export const getProducts = (): Promise<Product[]> => {
 };
 
 export const getProductsDetails = async (): Promise<ProductDetails[]> => {
-  try {
-    const [phones, tablets, accessories] = await Promise.all([
-      fetchData<ProductDetails[]>('/api/phones.json'),
-      fetchData<ProductDetails[]>('/api/tablets.json'),
-      fetchData<ProductDetails[]>('/api/accessories.json'),
-    ]);
+  const [phones, tablets, accessories] = await Promise.all([
+    fetchData<ProductDetails[]>('/api/phones.json'),
+    fetchData<ProductDetails[]>('/api/tablets.json'),
+    fetchData<ProductDetails[]>('/api/accessories.json'),
+  ]);
 
-    return [...phones, ...tablets, ...accessories];
-  } catch (error) {
-    return [];
-  }
+  return [...phones, ...tablets, ...accessories];
 };

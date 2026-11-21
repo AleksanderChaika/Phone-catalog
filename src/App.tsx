@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Product } from './types/Product';
 import { ProductDetails } from './types/ProductDetails';
@@ -23,8 +23,12 @@ export const App: React.FC = () => {
   const [accessories, setAccessories] = useState<Product[]>([]);
   const [details, setDetails] = useState<ProductDetails[]>([]);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
+    setLoading(true);
+    setHasError(false);
+
     Promise.all([api.getProducts(), api.getProductsDetails()])
       .then(([productsData, detailsData]) => {
         setAllProducts(productsData);
@@ -35,14 +39,29 @@ export const App: React.FC = () => {
         );
         setDetails(detailsData);
       })
-      .catch(() => {})
+      .catch(() => setHasError(true))
       .finally(() => {
         setLoading(false);
       });
   }, []);
 
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (hasError) {
+    return (
+      <div className="app__error" role="alert">
+        <p>Failed to load products. Check your connection and try again.</p>
+        <button type="button" onClick={loadData}>
+          Retry
+        </button>
+      </div>
+    );
   }
 
   return (
