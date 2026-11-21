@@ -3,11 +3,11 @@ import './PhonesPage.scss';
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Product } from '../../../types/Product';
-import { ProductCard } from '../../ProductCard/ProductCard';
-import { SortSelector } from '../../SortSelector/SortSelector';
-import { ItemsPerPage } from '../../ItemsPerPage/ItemsPerPage';
-import { Pagination } from '../../Pagination/Pagination';
-import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
+import { ProductCard } from '../../ProductCard';
+import { SortSelector } from '../../SortSelector';
+import { ItemsPerPage } from '../../ItemsPerPage';
+import { Pagination } from '../../Pagination';
+import { Breadcrumbs } from '../../Breadcrumbs';
 import { getValidPage } from '../../../utils/pagination';
 
 interface Props {

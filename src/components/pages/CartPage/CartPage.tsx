@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useCart } from '../../../context/CartContext';
-import { CartItem } from '../../CartItem/CartItem';
+import { CartItem } from '../../CartItem';
 import './CartPage.scss';
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')

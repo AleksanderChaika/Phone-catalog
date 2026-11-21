@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ProductsSlider.scss';
 import { Product } from '../../types/Product';
-import { ProductCard } from '../ProductCard/ProductCard';
+import { ProductCard } from '../ProductCard';
 
 interface Props {
   title: string;

@@ -1,8 +1,8 @@
 import './FavoritesPage.scss';
 import React from 'react';
 import { useFavorites } from '../../../context/FavoritesContext';
-import { ProductCard } from '../../ProductCard/ProductCard';
-import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
+import { ProductCard } from '../../ProductCard';
+import { Breadcrumbs } from '../../Breadcrumbs';
 
 export const FavoritesPage: React.FC = () => {
   const { favorites } = useFavorites();
