@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .categories {
   margin-top: 56px;
 
@@ -10,7 +12,7 @@
     font-weight: 800;
     font-size: 24px;
     margin-bottom: 24px;
-    color: #fff;
+    color: $color-white;
 
     @media (min-width: 640px) {
       font-size: 32px;
@@ -85,13 +87,13 @@
     font-family: Mont, sans-serif;
     font-size: 20px;
     font-weight: 700;
-    color: #fff;
+    color: $color-white;
     margin-bottom: 4px;
   }
 
   &__count {
     font-family: Mont, sans-serif;
     font-size: 14px;
-    color: #89939a;
+    color: $color-text-muted;
   }
 }

@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as *;
+
 .favorites-page {
   padding-bottom: 80px;
 
@@ -24,7 +26,7 @@
   }
 
   &__title {
-    color: #fff;
+    color: $color-white;
     font-size: 32px;
     font-weight: 700;
     line-height: 40px;
@@ -38,7 +40,7 @@
   }
 
   &__count {
-    color: #89939a;
+    color: $color-text-muted;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 40px;
@@ -76,7 +78,7 @@
   }
 
   &__empty {
-    color: #fff;
+    color: $color-white;
     font-size: 20px;
     margin-top: 40px;
   }

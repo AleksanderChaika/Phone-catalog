@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .items-per-page {
   display: flex;
   flex-direction: column;
@@ -6,7 +8,7 @@
   &__label {
     font-size: 12px;
     font-weight: 700;
-    color: #89939a;
+    color: $color-text-muted;
   }
 
   &__select {
@@ -14,8 +16,8 @@
     min-width: 128px;
     padding: 0 12px;
 
-    background-color: #323542;
-    color: #f1f2f9;
+    background-color: $color-surface-alt;
+    color: $color-text;
     border: none;
     border-radius: 0;
 
@@ -37,11 +39,11 @@
     padding-right: 40px;
 
     &:hover {
-      background-color: #4a4d58;
+      background-color: $color-border-strong;
     }
 
     &:focus {
-      background-color: #4a4d58;
+      background-color: $color-border-strong;
     }
   }
 }

@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as *;
+
 .home-page {
   padding-left: 0;
   padding-right: 0;
@@ -24,8 +26,8 @@
   }
 
   &__product-card {
-    background-color: #323542;
-    border: 1px solid #4a4d58;
+    background-color: $color-surface-alt;
+    border: 1px solid $color-border-strong;
     display: flex;
     flex-direction: column;
     padding: 32px;
@@ -53,7 +55,7 @@
 .main-title {
   font-family: Mont, sans-serif;
   font-weight: 800;
-  color: #fff;
+  color: $color-white;
   letter-spacing: -0.01em;
 
   font-size: 32px;

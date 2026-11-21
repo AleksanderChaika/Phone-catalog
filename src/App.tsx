@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Product } from './types/Product';
 import { ProductDetails } from './types/ProductDetails';
@@ -12,37 +12,63 @@ import { PhonesPage } from './components/pages/PhonesPage/PhonesPage';
 import { ProductDetailsPage } from './components/pages/ProductDetailsPage/ProductDetailsPage';
 import { CartPage } from './components/pages/CartPage/CartPage';
 import { FavoritesPage } from './components/pages/FavoritesPage/FavoritesPage';
+import { NotFoundPage } from './components/pages/NotFoundPage/NotFoundPage';
+import { Loader } from './components/Loader';
 import { ScrollToTop } from './utils/ScrollToTop';
 
 import './App.scss';
 
 export const App: React.FC = () => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [phones, setPhones] = useState<Product[]>([]);
-  const [tablets, setTablets] = useState<Product[]>([]);
-  const [accessories, setAccessories] = useState<Product[]>([]);
   const [details, setDetails] = useState<ProductDetails[]>([]);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
+    setLoading(true);
+    setHasError(false);
+
     Promise.all([api.getProducts(), api.getProductsDetails()])
       .then(([productsData, detailsData]) => {
         setAllProducts(productsData);
-        setPhones(productsData.filter(item => item.category === 'phones'));
-        setTablets(productsData.filter(item => item.category === 'tablets'));
-        setAccessories(
-          productsData.filter(item => item.category === 'accessories'),
-        );
         setDetails(detailsData);
       })
-      .catch(() => {})
+      .catch(() => setHasError(true))
       .finally(() => {
         setLoading(false);
       });
   }, []);
 
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  const phones = useMemo(
+    () => allProducts.filter(item => item.category === 'phones'),
+    [allProducts],
+  );
+  const tablets = useMemo(
+    () => allProducts.filter(item => item.category === 'tablets'),
+    [allProducts],
+  );
+  const accessories = useMemo(
+    () => allProducts.filter(item => item.category === 'accessories'),
+    [allProducts],
+  );
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader text="Loading products..." />;
+  }
+
+  if (hasError) {
+    return (
+      <div className="app__error" role="alert">
+        <p>Failed to load products. Check your connection and try again.</p>
+        <button type="button" className="btn-primary" onClick={loadData}>
+          Retry
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -81,7 +107,7 @@ export const App: React.FC = () => {
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/cart" element={<CartPage />} />
 
-          <Route path="*" element={<h1>Page not found</h1>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
 

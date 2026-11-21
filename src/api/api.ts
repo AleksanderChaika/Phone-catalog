@@ -2,8 +2,7 @@
 import { Product } from '../types/Product';
 import { ProductDetails } from '../types/ProductDetails';
 
-const BASE_URL =
-  window.location.hostname === 'localhost' ? '' : '/react_phone-catalog';
+const BASE_URL = import.meta.env.BASE_URL;
 
 const fetchData = async <T>(path: string): Promise<T> => {
   const url = `${BASE_URL}${path}`.replace(/\/+/g, '/');
@@ -22,15 +21,11 @@ export const getProducts = (): Promise<Product[]> => {
 };
 
 export const getProductsDetails = async (): Promise<ProductDetails[]> => {
-  try {
-    const [phones, tablets, accessories] = await Promise.all([
-      fetchData<ProductDetails[]>('/api/phones.json'),
-      fetchData<ProductDetails[]>('/api/tablets.json'),
-      fetchData<ProductDetails[]>('/api/accessories.json'),
-    ]);
+  const [phones, tablets, accessories] = await Promise.all([
+    fetchData<ProductDetails[]>('/api/phones.json'),
+    fetchData<ProductDetails[]>('/api/tablets.json'),
+    fetchData<ProductDetails[]>('/api/accessories.json'),
+  ]);
 
-    return [...phones, ...tablets, ...accessories];
-  } catch (error) {
-    return [];
-  }
+  return [...phones, ...tablets, ...accessories];
 };

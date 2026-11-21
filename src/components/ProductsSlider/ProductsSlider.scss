@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .products-slider {
   margin-bottom: 56px;
 
@@ -20,7 +22,7 @@
     font-size: 22px;
     line-height: 31px;
     font-weight: 800;
-    color: #f1f2f9;
+    color: $color-text;
 
     @media (min-width: 640px) {
       font-size: 32px;
@@ -36,7 +38,7 @@
   &__btn {
     width: 32px;
     height: 32px;
-    border: 1px solid #323542;
+    border: 1px solid $color-surface-alt;
     background: transparent;
     cursor: pointer;
     display: flex;
@@ -47,19 +49,19 @@
     &:disabled {
       opacity: 0.5;
       cursor: default;
-      border-color: #3b3e49;
+      border-color: $color-border;
     }
 
     &:not(:disabled):hover {
-      border-color: #f1f2f9;
+      border-color: $color-text;
     }
 
     &::before {
       content: '';
       width: 8px;
       height: 8px;
-      border-left: 2px solid #f1f2f9;
-      border-bottom: 2px solid #f1f2f9;
+      border-left: 2px solid $color-text;
+      border-bottom: 2px solid $color-text;
       transform: rotate(45deg);
     }
 

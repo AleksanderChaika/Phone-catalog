@@ -21,6 +21,7 @@ interface CartContextType {
   removeFromCart: (productId: number) => void;
   changeQuantity: (productId: number, delta: number) => void;
   handleCheckout: () => void;
+  closeCheckout: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -84,12 +85,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     setIsCheckout(true);
-    setCart([]);
+  }, [cart.length]);
 
-    setTimeout(() => {
-      setIsCheckout(false);
-    }, 3000);
-  }, [cart.length, setCart]);
+  const closeCheckout = useCallback(() => {
+    setIsCheckout(false);
+    setCart([]);
+  }, [setCart]);
 
   const totalAmount = useMemo(
     () => cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
@@ -111,6 +112,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       removeFromCart,
       changeQuantity,
       handleCheckout,
+      closeCheckout,
     }),
     [
       cart,
@@ -121,6 +123,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       removeFromCart,
       changeQuantity,
       handleCheckout,
+      closeCheckout,
     ],
   );
 

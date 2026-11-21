@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .product-card {
   display: flex;
   width: 100%;
@@ -6,8 +8,8 @@
   flex-shrink: 0;
   flex-grow: 0;
   padding: 16px;
-  background-color: #161827;
-  border: 1px solid #3b3e49;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
   box-sizing: border-box;
   transition: border-color 0.3s ease;
 
@@ -16,7 +18,7 @@
   }
 
   &:hover {
-    border-color: #f1f2f9;
+    border-color: $color-text;
   }
 
   &__image-container {
@@ -41,7 +43,7 @@
   &__title {
     margin: 0 0 8px;
     min-height: 42px;
-    color: #f1f2f9;
+    color: $color-text;
     font-family: Mont, sans-serif;
     font-size: 14px;
     font-weight: 600;
@@ -55,13 +57,13 @@
     gap: 8px;
 
     &-new {
-      color: #f1f2f9;
+      color: $color-text;
       font-size: 22px;
       font-weight: 800;
     }
 
     &-old {
-      color: #75767f;
+      color: $color-text-secondary;
       font-size: 14px;
       text-decoration: line-through;
     }
@@ -70,7 +72,7 @@
   &__divider {
     height: 1px;
     margin-bottom: 8px;
-    background-color: #3b3e49;
+    background-color: $color-border;
   }
 
   &__specs {
@@ -87,12 +89,12 @@
     font-size: 12px;
 
     &-label {
-      color: #75767f;
+      color: $color-text-secondary;
     }
 
     &-value {
       font-weight: 600;
-      color: #f1f2f9;
+      color: $color-text;
     }
   }
 
@@ -106,21 +108,21 @@
     flex: 1;
     height: 40px;
     border: none;
-    background-color: #8970ff;
-    color: #fff;
+    background-color: $color-accent;
+    color: $color-white;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #a38fff;
+      background-color: $color-accent-hover;
     }
 
     &.is-active {
-      border: 1px solid #3b3e49;
+      border: 1px solid $color-border;
       background-color: transparent;
-      color: #f1f2f9;
+      color: $color-text;
     }
   }
 
@@ -131,8 +133,8 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    border: 1px solid #3b3e49;
-    background-color: #323542;
+    border: 1px solid $color-border;
+    background-color: $color-surface-alt;
     cursor: pointer;
 
     .product-card__icon-heart {

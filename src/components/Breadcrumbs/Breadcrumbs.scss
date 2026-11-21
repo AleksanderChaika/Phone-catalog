@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .breadcrumbs {
   display: flex;
   align-items: center;
@@ -30,13 +32,13 @@
 
   &__link {
     text-decoration: none;
-    color: #fff !important;
+    color: $color-white !important;
     font-weight: 700;
     font-size: 12px;
     transition: opacity 0.3s;
 
     &:visited {
-      color: #fff;
+      color: $color-white;
     }
 
     &:hover {
@@ -47,7 +49,7 @@
   &__current {
     font-weight: 700;
     font-size: 12px;
-    color: #89939a;
+    color: $color-text-muted;
     cursor: default;
 
     white-space: nowrap;
