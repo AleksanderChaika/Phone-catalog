@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import './PhonesPage.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Product } from '../../../types/Product';
 import { ProductCard } from '../../ProductCard/ProductCard';
@@ -15,10 +15,10 @@ interface Props {
 }
 
 export const PhonesPage: React.FC<Props> = ({ products, title }) => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sort') || 'age';
   const perPage = searchParams.get('perPage') || '16';
-  const currentPage = Number(searchParams.get('page')) || 1;
+  const pageParam = searchParams.get('page');
 
   const sortedProducts = [...products].sort((a, b) => {
     switch (sortBy) {
@@ -34,6 +34,24 @@ export const PhonesPage: React.FC<Props> = ({ products, title }) => {
   const total = sortedProducts.length;
   const isAll = perPage === 'all';
   const itemsCount = isAll ? total : Number(perPage);
+
+  // Keep the page inside 1..totalPages, so ?page=99 never shows an empty list
+  const totalPages = itemsCount > 0 ? Math.ceil(total / itemsCount) : 1;
+  const requestedPage = Math.trunc(Number(pageParam)) || 1;
+  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+
+  useEffect(() => {
+    if (pageParam === null || isAll || total === 0) {
+      return;
+    }
+
+    if (pageParam !== String(currentPage)) {
+      const params = new URLSearchParams(searchParams);
+
+      params.set('page', String(currentPage));
+      setSearchParams(params, { replace: true });
+    }
+  }, [pageParam, currentPage, isAll, total, searchParams, setSearchParams]);
 
   const start = (currentPage - 1) * itemsCount;
   const end = isAll ? total : start + itemsCount;
