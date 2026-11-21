@@ -6,6 +6,7 @@ import { useFavorites } from '../../../context/FavoritesContext';
 import { Product } from '../../../types/Product';
 import { ProductDetails } from '../../../types/ProductDetails';
 import { ProductCard } from '../../ProductCard/ProductCard';
+import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import './ProductDetailsPage.scss';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
-  const { productId } = useParams();
+  const { category, productId } = useParams();
   const { cart, addToCart, removeFromCart } = useCart();
   const { favorites, toggleFavorite } = useFavorites();
 
@@ -49,10 +50,17 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   }, [product]);
 
   if (!product || !baseProduct) {
+    const isKnownCategory = ['phones', 'tablets', 'accessories'].includes(
+      category ?? '',
+    );
+
     return (
-      <div className="details container">
-        <h1 className="details__title">Product not found</h1>
-      </div>
+      <NotFoundPage
+        subtitle="Product not found"
+        text="We couldn't find a product with this ID. It may have been removed or the link is incorrect."
+        linkTo={isKnownCategory ? `/${category}` : '/'}
+        linkLabel={isKnownCategory ? `Back to ${category}` : 'Go to Home Page'}
+      />
     );
   }
 
