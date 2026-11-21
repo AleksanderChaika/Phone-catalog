@@ -207,7 +207,12 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
             <button
               type="button"
               className={`details__favorite-btn ${isInFavorites ? 'is-active' : ''}`}
-              aria-label="Add to favorite"
+              aria-label={
+                isInFavorites
+                  ? `Remove ${baseProduct.name} from favorites`
+                  : `Add ${baseProduct.name} to favorites`
+              }
+              aria-pressed={isInFavorites}
               onClick={() => toggleFavorite(baseProduct)}
             />
           </div>

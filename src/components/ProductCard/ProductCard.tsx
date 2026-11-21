@@ -87,7 +87,12 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           type="button"
           onClick={handleFavoriteClick}
           className={`product-card__btn-fav ${isFavorite ? 'is-active' : ''}`}
-          aria-label="Add to favorites"
+          aria-label={
+            isFavorite
+              ? `Remove ${product.name} from favorites`
+              : `Add ${product.name} to favorites`
+          }
+          aria-pressed={isFavorite}
         >
           <div className="product-card__icon-heart" />
         </button>
