@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Product } from './types/Product';
 import { ProductDetails } from './types/ProductDetails';
@@ -18,9 +18,6 @@ import './App.scss';
 
 export const App: React.FC = () => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [phones, setPhones] = useState<Product[]>([]);
-  const [tablets, setTablets] = useState<Product[]>([]);
-  const [accessories, setAccessories] = useState<Product[]>([]);
   const [details, setDetails] = useState<ProductDetails[]>([]);
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -32,11 +29,6 @@ export const App: React.FC = () => {
     Promise.all([api.getProducts(), api.getProductsDetails()])
       .then(([productsData, detailsData]) => {
         setAllProducts(productsData);
-        setPhones(productsData.filter(item => item.category === 'phones'));
-        setTablets(productsData.filter(item => item.category === 'tablets'));
-        setAccessories(
-          productsData.filter(item => item.category === 'accessories'),
-        );
         setDetails(detailsData);
       })
       .catch(() => setHasError(true))
@@ -48,6 +40,19 @@ export const App: React.FC = () => {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  const phones = useMemo(
+    () => allProducts.filter(item => item.category === 'phones'),
+    [allProducts],
+  );
+  const tablets = useMemo(
+    () => allProducts.filter(item => item.category === 'tablets'),
+    [allProducts],
+  );
+  const accessories = useMemo(
+    () => allProducts.filter(item => item.category === 'accessories'),
+    [allProducts],
+  );
 
   if (loading) {
     return <div>Loading...</div>;
