@@ -52,9 +52,9 @@
 
   &__img {
     display: block;
-    width: 100% !important;
+    width: 100%;
     height: auto;
-    max-width: none !important;
+    max-width: none;
     object-fit: contain;
     transition: transform 0.3s ease-in-out;
     transform-origin: center;
