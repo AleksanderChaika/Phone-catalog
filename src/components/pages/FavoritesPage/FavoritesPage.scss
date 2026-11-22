@@ -60,6 +60,12 @@
     @media (min-width: 1200px) {
       grid-template-columns: repeat(auto-fill, 272px);
     }
+
+    .product-card {
+      @media (min-width: 1200px) {
+        height: 506px;
+      }
+    }
   }
 
   &__item {
