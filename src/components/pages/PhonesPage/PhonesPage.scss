@@ -1,7 +1,6 @@
 @use '../../../styles/variables' as *;
 
 .phones-page {
-  padding-bottom: 40px;
   padding-top: 48px;
 
   @media (min-width: 640px) {

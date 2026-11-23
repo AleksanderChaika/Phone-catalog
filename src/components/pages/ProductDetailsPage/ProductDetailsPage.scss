@@ -5,14 +5,12 @@
   color: $color-white;
   font-family: Mont, sans-serif;
   padding-top: 72px;
-  padding-bottom: 56px;
   width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
 
   @media screen and (min-width: 639.5px) {
     padding-top: 40px;
-    padding-bottom: 80px;
   }
 
   &__top-nav {
