@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as *;
 
 .details {
-  background-color: #0f1121;
+  background-color: $color-bg;
   color: $color-white;
   font-family: Mont, sans-serif;
   padding-top: 72px;
@@ -227,7 +227,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid #0f1121;
+    border: 2px solid $color-bg;
     outline: 1px solid $color-border;
     cursor: pointer;
 
@@ -249,7 +249,7 @@
 
       &.is-active {
         background: $color-white;
-        color: #0f1121;
+        color: $color-bg;
         border-color: $color-white;
       }
     }
