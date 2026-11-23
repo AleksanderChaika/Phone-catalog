@@ -8,6 +8,7 @@ import { ProductDetails } from '../../../types/ProductDetails';
 import { Breadcrumbs } from '../../Breadcrumbs';
 import { ProductCard } from '../../ProductCard';
 import { NotFoundPage } from '../NotFoundPage';
+import { hasDiscount } from '../../../utils/discount';
 import './ProductDetailsPage.scss';
 
 interface Props {
@@ -182,8 +183,10 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
           </div>
 
           <div className="details__price-block">
-            <span className="details__price">{`$${product.priceDiscount}`}</span>
-            <span className="details__price-old">{`$${product.priceRegular}`}</span>
+            <span className="details__price">{`$${baseProduct.price}`}</span>
+            {hasDiscount(baseProduct) && (
+              <span className="details__price-old">{`$${baseProduct.fullPrice}`}</span>
+            )}
           </div>
 
           <div className="details__actions">

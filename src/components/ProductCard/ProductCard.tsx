@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Product } from '../../types/Product';
 import { useCart } from '../../context/CartContext';
 import { useFavorites } from '../../context/FavoritesContext';
+import { hasDiscount } from '../../utils/discount';
 import './ProductCard.scss';
 
 interface Props {
@@ -50,7 +51,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <div className="product-card__price">
         <span className="product-card__price-new">{`$${product.price}`}</span>
-        {product.fullPrice && (
+        {hasDiscount(product) && (
           <span className="product-card__price-old">{`$${product.fullPrice}`}</span>
         )}
       </div>

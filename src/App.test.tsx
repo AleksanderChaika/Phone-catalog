@@ -170,3 +170,95 @@ describe('product page breadcrumbs', () => {
     expect(nav.querySelectorAll('.breadcrumbs__separator')).toHaveLength(2);
   });
 });
+
+describe('product page price', () => {
+  const makeDetail = (id: string): ProductDetails => ({
+    id,
+    category: 'phones',
+    namespaceId: 'apple-iphone',
+    name: `Details ${id}`,
+    capacityAvailable: ['128GB'],
+    capacity: '128GB',
+    priceRegular: 111,
+    priceDiscount: 99,
+    colorsAvailable: ['black'],
+    color: 'black',
+    images: ['img/phone.webp'],
+    description: [],
+    screen: '6"',
+    resolution: '1080',
+    processor: 'A13',
+    ram: '4GB',
+    camera: '12MP',
+    zoom: '2x',
+    cell: ['GPRS'],
+  });
+
+  const catalog = [
+    createProduct(1, {
+      itemId: 'new-phone',
+      year: 2022,
+      price: 500,
+      fullPrice: 600,
+    }),
+    createProduct(2, {
+      itemId: 'old-phone',
+      year: 2020,
+      price: 300,
+      fullPrice: 400,
+    }),
+  ];
+
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => ({
+        ok: true,
+        statusText: 'OK',
+        json: async () => {
+          if (url.includes('products.json')) {
+            return catalog;
+          }
+
+          return url.includes('phones.json')
+            ? [makeDetail('new-phone'), makeDetail('old-phone')]
+            : [];
+        },
+      })),
+    );
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  const priceBlock = async (url: string) => {
+    const { container } = renderApp(url);
+
+    await screen.findByRole('navigation', { name: 'Breadcrumb' });
+
+    const block = container.querySelector<HTMLElement>('.details__price-block');
+
+    if (!block) {
+      throw new Error('No price block');
+    }
+
+    return within(block);
+  };
+
+  it('shows one price for a new model, the same as on its card', async () => {
+    const block = await priceBlock('/phones/new-phone');
+
+    expect(block.getByText('$500')).toBeInTheDocument();
+    expect(block.queryByText('$600')).not.toBeInTheDocument();
+    expect(block.queryByText('$99')).not.toBeInTheDocument();
+  });
+
+  it('shows both prices for an older model with a discount', async () => {
+    const block = await priceBlock('/phones/old-phone');
+
+    expect(block.getByText('$300')).toBeInTheDocument();
+    expect(block.getByText('$400')).toBeInTheDocument();
+  });
+});
