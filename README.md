@@ -118,6 +118,51 @@ Responsive layout for mobile, tablet and desktop.
 
 ---
 
+## Testing & CI
+
+### Tests
+
+Tests are written with Vitest and React Testing Library: 81 tests in 13 files.
+
+Run tests in watch mode:
+
+```bash
+npm test
+```
+
+Run tests once:
+
+```bash
+npm run test:run
+```
+
+### GitHub Actions
+
+The workflow in `.github/workflows/ci.yml` runs on every push to `main` and on every pull request to `main`. Its steps:
+
+1. Checkout
+2. Set up Node.js 24 with the npm cache
+3. Install dependencies: `npm ci --ignore-scripts`
+4. Lint scripts: `npm run lint-js`
+5. Lint styles: `npm run lint-css`
+6. Type check: `npx tsc --noEmit`
+7. Test: `npm run test:run`
+8. Build: `npm run build`
+9. Check that the build uses relative asset paths
+
+### Pre-commit hook
+
+The hook in `.githooks/pre-commit` stops at the first failing command and runs:
+
+1. `npm run lint-js`
+2. `npm run lint-css`
+3. `npx tsc --noEmit`
+4. `npm run test:run`
+
+It is enabled by the `prepare` script (`git config core.hooksPath .githooks`), which runs during `npm install`.
+
+---
+
 ## Project Structure
 
 ```text
