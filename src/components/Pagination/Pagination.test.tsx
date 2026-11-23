@@ -21,7 +21,6 @@ const pageNumbers = () =>
 
 describe('Pagination', () => {
   beforeEach(() => {
-    // jsdom does not implement scrolling
     window.scrollTo = vi.fn();
   });
 

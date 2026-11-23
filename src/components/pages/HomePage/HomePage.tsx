@@ -2,9 +2,9 @@
 import React from 'react';
 import './HomePage.scss';
 import { Product } from '../../../types/Product';
-import { Banner } from '../../Banner/Banner';
-import { ProductsSlider } from '../../ProductsSlider/ProductsSlider';
-import { Categories } from '../../Categories/Categories';
+import { Banner } from '../../Banner';
+import { ProductsSlider } from '../../ProductsSlider';
+import { Categories } from '../../Categories';
 
 interface Props {
   products: Product[];

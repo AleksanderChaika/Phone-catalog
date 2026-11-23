@@ -5,14 +5,14 @@ import { Product } from './types/Product';
 import { ProductDetails } from './types/ProductDetails';
 import * as api from './api/api';
 
-import { Header } from './components/Header/Header';
-import { Footer } from './components/Footer/Footer';
-import { HomePage } from './components/pages/HomePage/HomePage';
-import { PhonesPage } from './components/pages/PhonesPage/PhonesPage';
-import { ProductDetailsPage } from './components/pages/ProductDetailsPage/ProductDetailsPage';
-import { CartPage } from './components/pages/CartPage/CartPage';
-import { FavoritesPage } from './components/pages/FavoritesPage/FavoritesPage';
-import { NotFoundPage } from './components/pages/NotFoundPage/NotFoundPage';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { HomePage } from './components/pages/HomePage';
+import { PhonesPage } from './components/pages/PhonesPage';
+import { ProductDetailsPage } from './components/pages/ProductDetailsPage';
+import { CartPage } from './components/pages/CartPage';
+import { FavoritesPage } from './components/pages/FavoritesPage';
+import { NotFoundPage } from './components/pages/NotFoundPage';
 import { Loader } from './components/Loader';
 import { ScrollToTop } from './utils/ScrollToTop';
 

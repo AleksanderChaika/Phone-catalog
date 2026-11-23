@@ -22,32 +22,10 @@
 
     &:last-child {
       margin-bottom: 0;
-    }
-  }
 
-  &__product-card {
-    background-color: $color-surface-alt;
-    border: 1px solid $color-border-strong;
-    display: flex;
-    flex-direction: column;
-    padding: 32px;
-    box-sizing: border-box;
-
-    width: 212px;
-    height: auto;
-
-    @media (min-width: 640px) {
-      width: 237px !important;
-      min-width: 237px !important;
-      max-width: 237px !important;
-      height: 512px !important;
-    }
-
-    @media (min-width: 1200px) {
-      width: 272px !important;
-      min-width: 272px !important;
-      max-width: 272px !important;
-      height: 506px !important;
+      .products-slider {
+        margin-bottom: 0;
+      }
     }
   }
 }

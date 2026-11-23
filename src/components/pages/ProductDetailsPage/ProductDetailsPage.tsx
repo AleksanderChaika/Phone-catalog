@@ -5,8 +5,8 @@ import { useCart } from '../../../context/CartContext';
 import { useFavorites } from '../../../context/FavoritesContext';
 import { Product } from '../../../types/Product';
 import { ProductDetails } from '../../../types/ProductDetails';
-import { ProductCard } from '../../ProductCard/ProductCard';
-import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
+import { ProductCard } from '../../ProductCard';
+import { NotFoundPage } from '../NotFoundPage';
 import './ProductDetailsPage.scss';
 
 interface Props {

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useCart } from '../../../context/CartContext';
-import { CartItem } from '../../CartItem/CartItem';
+import { CartItem } from '../../CartItem';
 import './CartPage.scss';
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')
@@ -24,8 +24,6 @@ export const CartPage: React.FC = () => {
 
   const handleClose = useCallback(() => {
     closeCheckout();
-    // The Checkout button disappears together with the cleared cart,
-    // so focus goes to the page title instead of getting lost
     titleRef.current?.focus();
   }, [closeCheckout]);
 
@@ -41,7 +39,6 @@ export const CartPage: React.FC = () => {
         handleClose();
       }
 
-      // Close is the only focusable element, so keep focus inside the modal
       if (event.key === 'Tab') {
         event.preventDefault();
         closeButtonRef.current?.focus();

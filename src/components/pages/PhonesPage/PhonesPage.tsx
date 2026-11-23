@@ -3,11 +3,11 @@ import './PhonesPage.scss';
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Product } from '../../../types/Product';
-import { ProductCard } from '../../ProductCard/ProductCard';
-import { SortSelector } from '../../SortSelector/SortSelector';
-import { ItemsPerPage } from '../../ItemsPerPage/ItemsPerPage';
-import { Pagination } from '../../Pagination/Pagination';
-import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
+import { ProductCard } from '../../ProductCard';
+import { SortSelector } from '../../SortSelector';
+import { ItemsPerPage } from '../../ItemsPerPage';
+import { Pagination } from '../../Pagination';
+import { Breadcrumbs } from '../../Breadcrumbs';
 import { getValidPage } from '../../../utils/pagination';
 
 interface Props {
@@ -36,7 +36,6 @@ export const PhonesPage: React.FC<Props> = ({ products, title }) => {
   const isAll = perPage === 'all';
   const itemsCount = isAll ? total : Number(perPage);
 
-  // Keep the page inside 1..totalPages, so ?page=99 never shows an empty list
   const totalPages = itemsCount > 0 ? Math.ceil(total / itemsCount) : 1;
   const currentPage = getValidPage(pageParam, totalPages);
 

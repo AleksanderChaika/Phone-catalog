@@ -6,7 +6,6 @@ import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { LocationProbe, createProduct, routerFuture } from './testUtils';
 
-// 20 phones: with 16 per page that is a full first page and 4 on the second
 const phones = Array.from({ length: 20 }, (_, i) => createProduct(i + 1));
 
 const mockFetch = () =>
@@ -51,13 +50,10 @@ describe('phones page and the ?page param', () => {
     );
   });
 
-  it('redirects ?page=99 to the last page with replace', async () => {
+  it('redirects ?page=99 to the last page (4 phones) via replace', async () => {
     renderApp('/phones?page=99');
 
-    // The cards render before the redirect effect updates the URL,
-    // so the URL has to be awaited as well
     await vi.waitFor(() => {
-      // Only 4 phones are left on the last page
       expect(screen.getAllByRole('article')).toHaveLength(4);
       expect(screen.getByTestId('location')).toHaveTextContent(
         '/phones?page=2',
@@ -96,7 +92,6 @@ describe('phones page and the ?page param', () => {
       expect(screen.getAllByRole('article')).toHaveLength(4);
     });
 
-    // Let any pending effects run, so a wrong redirect would show up here
     await act(async () => undefined);
 
     expect(screen.getByTestId('location')).toHaveTextContent('/phones?page=2');
