@@ -1,6 +1,6 @@
 # Phone Catalog
 
-A modern **Single Page Application (SPA)** built with **React** and **TypeScript** that simulates an online mobile phone store. Users can browse products, search, filter, sort, add items to favorites or the shopping cart, and explore detailed product pages.
+A modern **Single Page Application (SPA)** built with **React** and **TypeScript** that simulates an online mobile phone store. Users can browse products by category, sort them, add items to favorites or the shopping cart, and explore detailed product pages.
 
 ---
 
@@ -14,9 +14,9 @@ https://aleksanderchaika.github.io/Phone-catalog/
 ## Design Reference
 
 **Figma Design:**
-[https://www.figma.com/design/3dVbRBfoY6f9cQZQ0fJz9A/Phone-catalog--V2--Rounded-Style](https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark?node-id=0-1&p=f&t=rPKTYGZ5LKYPpymd-0)
+[https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark](https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark)
 
-The application was developed based on the original Figma design with attention to responsive layouts, reusable UI components, and pixel-perfect implementation.
+The application is built from the Figma design with responsive layouts and reusable components.
 
 ---
 
@@ -27,8 +27,8 @@ The application was developed based on the original Figma design with attention 
 * **React Router** — Client-side routing and dynamic navigation
 * **Context API** — Global state management
 * **SCSS (Sass)** — Modular styling with BEM methodology
-* **Vite** — Fast development server and build tool
-* **ESLint & Prettier** — Code quality and formatting
+* **Vite (via @mate-academy/scripts)** — Fast development server and build tool
+* **ESLint, Stylelint & Prettier** — Code quality and formatting
 
 ---
 
@@ -38,7 +38,7 @@ The application was developed based on the original Figma design with attention 
 
 Before running the project, make sure you have installed:
 
-* Node.js (v18 or higher recommended)
+* Node.js 24 (the version used in CI)
 * npm
 
 ### Installation
@@ -67,11 +67,7 @@ Start the development server:
 npm start
 ```
 
-Open your browser:
-
-```text
-http://localhost:3000
-```
+Open the local URL shown in the terminal.
 
 ---
 
@@ -83,10 +79,9 @@ http://localhost:3000
 * Responsive product grid
 * Product cards with pricing and specifications
 
-### Search & Filtering
+### Browsing & Sorting
 
-* Search products by name
-* Filter products by category
+* Browse products by category (phones, tablets, accessories)
 * Sort products by age, name, or price
 * Change the number of displayed items per page
 
@@ -115,16 +110,11 @@ http://localhost:3000
 
 * Client-side routing with React Router
 * Breadcrumb navigation
-* URL-based search, filtering, sorting, and pagination
+* Sorting, items per page and pagination stored in the URL
 
 ### Responsive Design
 
-The application is fully optimized for:
-
-*  Mobile devices
-*  Tablets
-*  Laptops
-*  Desktop screens
+Responsive layout for mobile, tablet and desktop.
 
 ---
 
@@ -133,12 +123,11 @@ The application is fully optimized for:
 ```text
 src/
 ├── api/
-├── assets/
 ├── components/
+│   └── pages/
 ├── context/
-├── helpers/
 ├── hooks/
-├── pages/
+├── styles/
 ├── types/
 └── utils/
 ```
