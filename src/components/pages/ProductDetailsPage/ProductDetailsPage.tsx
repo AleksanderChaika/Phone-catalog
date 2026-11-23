@@ -5,6 +5,7 @@ import { useCart } from '../../../context/CartContext';
 import { useFavorites } from '../../../context/FavoritesContext';
 import { Product } from '../../../types/Product';
 import { ProductDetails } from '../../../types/ProductDetails';
+import { Breadcrumbs } from '../../Breadcrumbs';
 import { ProductCard } from '../../ProductCard';
 import { NotFoundPage } from '../NotFoundPage';
 import './ProductDetailsPage.scss';
@@ -65,9 +66,6 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   }
 
   const categoryPath = `/${baseProduct.category}`;
-  const categoryName =
-    baseProduct.category.charAt(0).toUpperCase() +
-    baseProduct.category.slice(1);
 
   const recommendedProducts = products
     .filter(p => p.category === baseProduct.category && p.itemId !== productId)
@@ -121,15 +119,7 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
 
   return (
     <div className="details container" data-cy="productDetails">
-      <nav className="details__top-nav" aria-label="Breadcrumb">
-        <Link to="/" className="details__home-icon" aria-label="Home" />
-        <span className="details__arrow"></span>
-        <Link to={categoryPath} className="details__category-link">
-          {categoryName}
-        </Link>
-        <span className="details__arrow"></span>
-        <span className="details__model-name">{product.name}</span>
-      </nav>
+      <Breadcrumbs currentLabel={product.name} />
 
       <Link
         to={categoryPath}
