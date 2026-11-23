@@ -42,30 +42,27 @@
   &__list {
     display: grid;
     grid-template-columns: 288px;
-    row-gap: 40px;
+    row-gap: $card-grid-row-gap;
     justify-content: center;
 
-    @media (min-width: 640px) {
-      grid-template-columns: repeat(2, 288px);
-      gap: 40px 16px;
-      justify-content: center;
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $card-grid-row-gap $card-grid-column-gap;
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: $breakpoint-tablet-wide) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (min-width: $breakpoint-desktop) {
       grid-template-columns: repeat(4, 272px);
-      column-gap: 16px;
+      column-gap: $card-grid-column-gap;
       justify-content: center;
     }
 
     .product-card {
-      @media (min-width: 640px) {
-        height: 506px;
-        width: 288px;
-      }
-
-      @media (min-width: 1200px) {
-        height: 506px;
-        width: 272px;
+      @media (min-width: $breakpoint-tablet) {
+        height: $card-height;
       }
     }
   }
