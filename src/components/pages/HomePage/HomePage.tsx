@@ -5,6 +5,7 @@ import { Product } from '../../../types/Product';
 import { Banner } from '../../Banner';
 import { ProductsSlider } from '../../ProductsSlider';
 import { Categories } from '../../Categories';
+import { NEW_MODELS_FROM_YEAR, hasDiscount } from '../../../utils/discount';
 
 interface Props {
   products: Product[];
@@ -12,13 +13,11 @@ interface Props {
 
 export const HomePage: React.FC<Props> = ({ products }) => {
   const brandNew = products
-    .filter(
-      product => product.year >= 2022 && product.fullPrice > product.price,
-    )
+    .filter(product => product.year >= NEW_MODELS_FROM_YEAR)
     .sort((a, b) => b.price - a.price);
 
   const hotPrices = products
-    .filter(product => product.fullPrice - product.price > 0)
+    .filter(hasDiscount)
     .sort((a, b) => b.fullPrice - b.price - (a.fullPrice - a.price));
 
   return (

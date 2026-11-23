@@ -1,12 +1,14 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useCart } from '../../../context/CartContext';
-import { useFavorites } from '../../../context/FavoritesContext';
 import { Product } from '../../../types/Product';
 import { ProductDetails } from '../../../types/ProductDetails';
+import { AddToCartButton } from '../../AddToCartButton';
+import { Breadcrumbs } from '../../Breadcrumbs';
+import { FavoriteButton } from '../../FavoriteButton';
 import { ProductCard } from '../../ProductCard';
 import { NotFoundPage } from '../NotFoundPage';
+import { hasDiscount } from '../../../utils/discount';
 import './ProductDetailsPage.scss';
 
 interface Props {
@@ -16,8 +18,7 @@ interface Props {
 
 export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   const { category, productId } = useParams();
-  const { cart, addToCart, removeFromCart } = useCart();
-  const { favorites, toggleFavorite } = useFavorites();
+  const titleId = useId();
 
   const product = details.find(d => d.id === productId);
   const baseProduct = products.find(p => p.itemId === productId);
@@ -65,24 +66,10 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   }
 
   const categoryPath = `/${baseProduct.category}`;
-  const categoryName =
-    baseProduct.category.charAt(0).toUpperCase() +
-    baseProduct.category.slice(1);
 
   const recommendedProducts = products
     .filter(p => p.category === baseProduct.category && p.itemId !== productId)
     .slice(0, 12);
-
-  const isInCart = cart.some(item => item.id === baseProduct.id);
-  const isInFavorites = favorites.some(item => item.id === baseProduct.id);
-
-  const handleCartClick = () => {
-    if (isInCart) {
-      removeFromCart(baseProduct.id);
-    } else {
-      addToCart(baseProduct);
-    }
-  };
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -121,15 +108,7 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
 
   return (
     <div className="details container" data-cy="productDetails">
-      <nav className="details__top-nav" aria-label="Breadcrumb">
-        <Link to="/" className="details__home-icon" aria-label="Home" />
-        <span className="details__arrow"></span>
-        <Link to={categoryPath} className="details__category-link">
-          {categoryName}
-        </Link>
-        <span className="details__arrow"></span>
-        <span className="details__model-name">{product.name}</span>
-      </nav>
+      <Breadcrumbs currentLabel={product.name} />
 
       <Link
         to={categoryPath}
@@ -139,7 +118,9 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
         Back
       </Link>
 
-      <h1 className="details__title">{product.name}</h1>
+      <h1 id={titleId} className="details__title">
+        {product.name}
+      </h1>
 
       <div className="details__content">
         <div className="details__gallery">
@@ -192,28 +173,21 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
           </div>
 
           <div className="details__price-block">
-            <span className="details__price">{`$${product.priceDiscount}`}</span>
-            <span className="details__price-old">{`$${product.priceRegular}`}</span>
+            <span className="details__price">{`$${baseProduct.price}`}</span>
+            {hasDiscount(baseProduct) && (
+              <span className="details__price-old">{`$${baseProduct.fullPrice}`}</span>
+            )}
           </div>
 
           <div className="details__actions">
-            <button
-              type="button"
-              className={`details__cart-btn ${isInCart ? 'is-active' : ''}`}
-              onClick={handleCartClick}
-            >
-              {isInCart ? 'Added' : 'Add to cart'}
-            </button>
-            <button
-              type="button"
-              className={`details__favorite-btn ${isInFavorites ? 'is-active' : ''}`}
-              aria-label={
-                isInFavorites
-                  ? `Remove ${baseProduct.name} from favorites`
-                  : `Add ${baseProduct.name} to favorites`
-              }
-              aria-pressed={isInFavorites}
-              onClick={() => toggleFavorite(baseProduct)}
+            <AddToCartButton
+              product={baseProduct}
+              className="details__cart-btn"
+              describedById={titleId}
+            />
+            <FavoriteButton
+              product={baseProduct}
+              className="details__favorite-btn"
             />
           </div>
 

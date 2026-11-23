@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useId } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types/Product';
-import { useCart } from '../../context/CartContext';
-import { useFavorites } from '../../context/FavoritesContext';
+import { hasDiscount } from '../../utils/discount';
+import { AddToCartButton } from '../AddToCartButton';
+import { FavoriteButton } from '../FavoriteButton';
 import './ProductCard.scss';
 
 interface Props {
@@ -11,24 +12,7 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
-  const { cart, addToCart, removeFromCart } = useCart();
-  const { favorites, toggleFavorite } = useFavorites();
-
-  const isInCart = cart.some(item => item.id === product.id);
-  const isFavorite = favorites.some(item => item.id === product.id);
-
-  const handleCartClick = () => {
-    if (isInCart) {
-      removeFromCart(product.id);
-    } else {
-      addToCart(product);
-    }
-  };
-
-  const handleFavoriteClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    toggleFavorite(product);
-  };
+  const titleId = useId();
 
   const imagePath = product.image;
 
@@ -45,12 +29,14 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
             className="product-card__image"
           />
         </div>
-        <h3 className="product-card__title">{product.name}</h3>
+        <h3 id={titleId} className="product-card__title">
+          {product.name}
+        </h3>
       </Link>
 
       <div className="product-card__price">
         <span className="product-card__price-new">{`$${product.price}`}</span>
-        {product.fullPrice && (
+        {hasDiscount(product) && (
           <span className="product-card__price-old">{`$${product.fullPrice}`}</span>
         )}
       </div>
@@ -75,27 +61,13 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       </div>
 
       <div className="product-card__buttons">
-        <button
-          type="button"
-          onClick={handleCartClick}
-          className={`product-card__btn-cart ${isInCart ? 'is-active' : ''}`}
-        >
-          {isInCart ? 'Added' : 'Add to cart'}
-        </button>
+        <AddToCartButton
+          product={product}
+          className="product-card__btn-cart"
+          describedById={titleId}
+        />
 
-        <button
-          type="button"
-          onClick={handleFavoriteClick}
-          className={`product-card__btn-fav ${isFavorite ? 'is-active' : ''}`}
-          aria-label={
-            isFavorite
-              ? `Remove ${product.name} from favorites`
-              : `Add ${product.name} to favorites`
-          }
-          aria-pressed={isFavorite}
-        >
-          <div className="product-card__icon-heart" />
-        </button>
+        <FavoriteButton product={product} className="product-card__btn-fav" />
       </div>
     </article>
   );

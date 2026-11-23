@@ -1,0 +1,23 @@
+@use '../../styles/variables' as *;
+
+.add-to-cart {
+  border: none;
+  background-color: $color-accent;
+  color: $color-white;
+  font-family: Mont, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $color-accent-hover;
+  }
+
+  &.is-active,
+  &.is-active:hover {
+    background-color: $color-surface-alt;
+    color: $color-white;
+  }
+}

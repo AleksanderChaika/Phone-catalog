@@ -6,8 +6,10 @@
   gap: 8px;
   margin-top: 24px;
   margin-bottom: 24px;
+  min-width: 0;
 
   &__home {
+    flex-shrink: 0;
     width: 16px;
     height: 16px;
     display: block;
@@ -22,6 +24,7 @@
   }
 
   &__separator {
+    flex-shrink: 0;
     width: 16px;
     height: 16px;
     background: url('/img/icons/arrow-right.svg') no-repeat center;
@@ -31,6 +34,8 @@
   }
 
   &__link {
+    flex-shrink: 0;
+    white-space: nowrap;
     text-decoration: none;
     color: $color-white;
     font-weight: 700;
@@ -52,9 +57,9 @@
     color: $color-text-muted;
     cursor: default;
 
+    min-width: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 300px;
   }
 }

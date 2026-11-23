@@ -107,45 +107,10 @@
   &__btn-cart {
     flex: 1;
     height: 40px;
-    border: none;
-    background-color: $color-accent;
-    color: $color-white;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: $color-accent-hover;
-    }
-
-    &.is-active {
-      border: 1px solid $color-border;
-      background-color: transparent;
-      color: $color-text;
-    }
   }
 
   &__btn-fav {
-    display: flex;
     width: 40px;
     height: 40px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid $color-border;
-    background-color: $color-surface-alt;
-    cursor: pointer;
-
-    .product-card__icon-heart {
-      width: 16px;
-      height: 16px;
-      background: url('/img/icons/heart.svg') no-repeat center;
-      background-size: contain;
-    }
-
-    &.is-active .product-card__icon-heart {
-      background: url('/img/icons/heart-filled.svg') no-repeat center;
-    }
   }
 }
