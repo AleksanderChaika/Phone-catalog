@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect, useId } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useFavorites } from '../../../context/FavoritesContext';
 import { Product } from '../../../types/Product';
 import { ProductDetails } from '../../../types/ProductDetails';
 import { AddToCartButton } from '../../AddToCartButton';
 import { Breadcrumbs } from '../../Breadcrumbs';
+import { FavoriteButton } from '../../FavoriteButton';
 import { ProductCard } from '../../ProductCard';
 import { NotFoundPage } from '../NotFoundPage';
 import { hasDiscount } from '../../../utils/discount';
@@ -18,7 +18,6 @@ interface Props {
 
 export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   const { category, productId } = useParams();
-  const { favorites, toggleFavorite } = useFavorites();
   const titleId = useId();
 
   const product = details.find(d => d.id === productId);
@@ -71,8 +70,6 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   const recommendedProducts = products
     .filter(p => p.category === baseProduct.category && p.itemId !== productId)
     .slice(0, 12);
-
-  const isInFavorites = favorites.some(item => item.id === baseProduct.id);
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -188,16 +185,9 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
               className="details__cart-btn"
               describedById={titleId}
             />
-            <button
-              type="button"
-              className={`details__favorite-btn ${isInFavorites ? 'is-active' : ''}`}
-              aria-label={
-                isInFavorites
-                  ? `Remove ${baseProduct.name} from favorites`
-                  : `Add ${baseProduct.name} to favorites`
-              }
-              aria-pressed={isInFavorites}
-              onClick={() => toggleFavorite(baseProduct)}
+            <FavoriteButton
+              product={baseProduct}
+              className="details__favorite-btn"
             />
           </div>
 

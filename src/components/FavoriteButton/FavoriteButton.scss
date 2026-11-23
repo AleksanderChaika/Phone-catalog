@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+
+.favorite-button {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $color-border;
+  background-color: $color-surface-alt;
+  cursor: pointer;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    background: url('/img/icons/heart.svg') no-repeat center;
+    background-size: contain;
+  }
+
+  &.is-active &__icon {
+    background-image: url('/img/icons/heart-filled.svg');
+  }
+}

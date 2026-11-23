@@ -304,4 +304,33 @@ describe('product page', () => {
 
     expect(pageButton).toHaveAccessibleDescription('Details new-phone');
   });
+
+  it('shows the favorite state of the page on the same card', async () => {
+    renderApp('/phones/new-phone');
+
+    const nav = await screen.findByRole('navigation', { name: 'Breadcrumb' });
+    const label = 'Add to favorites: Phone 1';
+
+    await userEvent.click(screen.getByRole('button', { name: label }));
+
+    expect(screen.getByRole('button', { name: label })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+
+    await userEvent.click(within(nav).getByRole('link', { name: 'Phones' }));
+
+    const card = (
+      await screen.findByRole('heading', { name: 'Phone 1' })
+    ).closest('article');
+
+    if (!card) {
+      throw new Error('No card');
+    }
+
+    expect(within(card).getByRole('button', { name: label })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+  });
 });

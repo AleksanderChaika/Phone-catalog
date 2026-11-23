@@ -2,9 +2,9 @@
 import React, { useId } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types/Product';
-import { useFavorites } from '../../context/FavoritesContext';
 import { hasDiscount } from '../../utils/discount';
 import { AddToCartButton } from '../AddToCartButton';
+import { FavoriteButton } from '../FavoriteButton';
 import './ProductCard.scss';
 
 interface Props {
@@ -12,15 +12,7 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
-  const { favorites, toggleFavorite } = useFavorites();
   const titleId = useId();
-
-  const isFavorite = favorites.some(item => item.id === product.id);
-
-  const handleFavoriteClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    toggleFavorite(product);
-  };
 
   const imagePath = product.image;
 
@@ -75,19 +67,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           describedById={titleId}
         />
 
-        <button
-          type="button"
-          onClick={handleFavoriteClick}
-          className={`product-card__btn-fav ${isFavorite ? 'is-active' : ''}`}
-          aria-label={
-            isFavorite
-              ? `Remove ${product.name} from favorites`
-              : `Add ${product.name} to favorites`
-          }
-          aria-pressed={isFavorite}
-        >
-          <div className="product-card__icon-heart" />
-        </button>
+        <FavoriteButton product={product} className="product-card__btn-fav" />
       </div>
     </article>
   );
