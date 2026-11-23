@@ -38,4 +38,12 @@ describe('ProductCard price', () => {
 
     expect(screen.getAllByText('$700')).toHaveLength(1);
   });
+
+  it('describes the cart button with the product name', () => {
+    renderCard({ name: 'Apple iPhone 11' });
+
+    expect(
+      screen.getByRole('button', { name: 'Add to cart' }),
+    ).toHaveAccessibleDescription('Apple iPhone 11');
+  });
 });

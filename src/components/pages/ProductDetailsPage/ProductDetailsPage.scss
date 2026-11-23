@@ -231,16 +231,6 @@
   &__cart-btn {
     flex-grow: 1;
     height: 48px;
-    background: $color-accent;
-    color: $color-white;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background: $color-accent-hover;
-    }
   }
 
   &__favorite-btn {

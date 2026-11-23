@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { App } from './App';
 import { CartProvider } from './context/CartContext';
@@ -171,7 +172,7 @@ describe('product page breadcrumbs', () => {
   });
 });
 
-describe('product page price', () => {
+describe('product page', () => {
   const makeDetail = (id: string): ProductDetails => ({
     id,
     category: 'phones',
@@ -260,5 +261,47 @@ describe('product page price', () => {
 
     expect(block.getByText('$300')).toBeInTheDocument();
     expect(block.getByText('$400')).toBeInTheDocument();
+  });
+
+  it('shows the cart state of the page on the same card', async () => {
+    const { container } = renderApp('/phones/new-phone');
+
+    const nav = await screen.findByRole('navigation', { name: 'Breadcrumb' });
+
+    const pageButton =
+      container.querySelector<HTMLElement>('.details__cart-btn');
+
+    if (!pageButton) {
+      throw new Error('No cart button');
+    }
+
+    await userEvent.click(pageButton);
+
+    expect(pageButton).toHaveTextContent('Added');
+
+    await userEvent.click(within(nav).getByRole('link', { name: 'Phones' }));
+
+    const card = (
+      await screen.findByRole('heading', { name: 'Phone 1' })
+    ).closest('article');
+
+    if (!card) {
+      throw new Error('No card');
+    }
+
+    expect(within(card).getByRole('button', { name: 'Added' })).toHaveClass(
+      'is-active',
+    );
+  });
+
+  it('describes the page cart button with the product title', async () => {
+    const { container } = renderApp('/phones/new-phone');
+
+    await screen.findByRole('navigation', { name: 'Breadcrumb' });
+
+    const pageButton =
+      container.querySelector<HTMLElement>('.details__cart-btn');
+
+    expect(pageButton).toHaveAccessibleDescription('Details new-phone');
   });
 });

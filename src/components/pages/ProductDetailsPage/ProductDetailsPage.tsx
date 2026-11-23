@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useCart } from '../../../context/CartContext';
 import { useFavorites } from '../../../context/FavoritesContext';
 import { Product } from '../../../types/Product';
 import { ProductDetails } from '../../../types/ProductDetails';
+import { AddToCartButton } from '../../AddToCartButton';
 import { Breadcrumbs } from '../../Breadcrumbs';
 import { ProductCard } from '../../ProductCard';
 import { NotFoundPage } from '../NotFoundPage';
@@ -18,8 +18,8 @@ interface Props {
 
 export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
   const { category, productId } = useParams();
-  const { cart, addToCart, removeFromCart } = useCart();
   const { favorites, toggleFavorite } = useFavorites();
+  const titleId = useId();
 
   const product = details.find(d => d.id === productId);
   const baseProduct = products.find(p => p.itemId === productId);
@@ -72,16 +72,7 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
     .filter(p => p.category === baseProduct.category && p.itemId !== productId)
     .slice(0, 12);
 
-  const isInCart = cart.some(item => item.id === baseProduct.id);
   const isInFavorites = favorites.some(item => item.id === baseProduct.id);
-
-  const handleCartClick = () => {
-    if (isInCart) {
-      removeFromCart(baseProduct.id);
-    } else {
-      addToCart(baseProduct);
-    }
-  };
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -130,7 +121,9 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
         Back
       </Link>
 
-      <h1 className="details__title">{product.name}</h1>
+      <h1 id={titleId} className="details__title">
+        {product.name}
+      </h1>
 
       <div className="details__content">
         <div className="details__gallery">
@@ -190,13 +183,11 @@ export const ProductDetailsPage: React.FC<Props> = ({ products, details }) => {
           </div>
 
           <div className="details__actions">
-            <button
-              type="button"
-              className={`details__cart-btn ${isInCart ? 'is-active' : ''}`}
-              onClick={handleCartClick}
-            >
-              {isInCart ? 'Added' : 'Add to cart'}
-            </button>
+            <AddToCartButton
+              product={baseProduct}
+              className="details__cart-btn"
+              describedById={titleId}
+            />
             <button
               type="button"
               className={`details__favorite-btn ${isInFavorites ? 'is-active' : ''}`}

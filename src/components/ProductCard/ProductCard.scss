@@ -107,23 +107,6 @@
   &__btn-cart {
     flex: 1;
     height: 40px;
-    border: none;
-    background-color: $color-accent;
-    color: $color-white;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: $color-accent-hover;
-    }
-
-    &.is-active {
-      border: 1px solid $color-border;
-      background-color: transparent;
-      color: $color-text;
-    }
   }
 
   &__btn-fav {
